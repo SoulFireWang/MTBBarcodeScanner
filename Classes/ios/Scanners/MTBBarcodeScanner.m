@@ -24,6 +24,13 @@ static const NSInteger kErrorMethodNotAvailableOnIOSVersion = 1005;
 
 @interface MTBBarcodeScanner () <AVCaptureMetadataOutputObjectsDelegate, AVCapturePhotoCaptureDelegate>
 
+/*
+ @property isAutoFocusContinues
+ @abstract
+ continue to auto focus
+ */
+@property (nonatomic, assign) bool isAutoFocusContinue;
+
 /*!
  @property privateSessionQueue
  @abstract
@@ -317,7 +324,11 @@ static const NSInteger kErrorMethodNotAvailableOnIOSVersion = 1005;
     [self refreshVideoOrientation];
     
     // Configure 'tap to focus' functionality
-    [self configureTapToFocus];
+//    [self configureTapToFocus];
+    
+    // 自动聚焦
+    self.isAutoFocusContinue = YES;
+    [self autoFocus];
     
     self.resultBlock = resultBlock;
     
@@ -341,7 +352,44 @@ static const NSInteger kErrorMethodNotAvailableOnIOSVersion = 1005;
     return YES;
 }
 
+
+-(void)autoFocus{
+    
+    dispatch_time_t delayInSeconds = dispatch_time(DISPATCH_TIME_NOW,(int64_t)(3 * NSEC_PER_SEC));
+    
+    if(!self.isAutoFocusContinue) return
+        
+    NSLog(@"%@", [NSThread currentThread]);
+    
+    dispatch_after(delayInSeconds, dispatch_get_global_queue(0, 0), ^{
+        
+        if(!self.isAutoFocusContinue) return;
+        if([self.captureDevice lockForConfiguration:nil]){
+            
+            if(self.captureDevice.focusPointOfInterestSupported){
+                self.captureDevice.focusPointOfInterest = CGPointMake(0.5, 0.5);
+                self.captureDevice.focusMode = AVCaptureFocusModeAutoFocus;
+            }
+            
+            if(self.captureDevice.exposurePointOfInterestSupported){
+                self.captureDevice.exposurePointOfInterest = CGPointMake(0.5, 0.5);
+                self.captureDevice.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
+            }
+            
+            [self.captureDevice unlockForConfiguration];
+            
+            NSLog(@"auto focus");
+            
+            if(self.isAutoFocusContinue){
+                [self autoFocus];
+            }
+        }
+    });
+}
+
 - (void)stopScanning {
+    
+    self.isAutoFocusContinue = false;
     if (!self.session) {
         return;
     }
