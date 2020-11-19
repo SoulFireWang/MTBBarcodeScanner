@@ -1,3 +1,5 @@
+# This library is no longer actively maintained. If you are interested in maintaining it, please contact [the original author](mailto:mike@mikebuss.com).
+
 # MTBBarcodeScanner
 
 [![Version](https://img.shields.io/cocoapods/v/MTBBarcodeScanner.svg?style=flat)](http://cocoadocs.org/docsets/MTBBarcodeScanner)
@@ -200,6 +202,9 @@ class SwiftExampleViewController: UIViewController {
         super.viewDidLoad()
         
         scanner = MTBBarcodeScanner(previewView: previewView)
+
+        // Alternatively, limit the type of codes you can scan:
+        // scanner = MTBBarcodeScanner(metadataObjectTypes: [AVMetadataObject.ObjectType.qr.rawValue], previewView: previewView)
     }
     
     override func viewDidAppear(_ animated: Bool) {
