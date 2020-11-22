@@ -332,7 +332,7 @@
 				LastUpgradeCheck = 1010;
 				TargetAttributes = {
 					27C3BF3D18A7140F00C44713 = {
-						DevelopmentTeam = K83F2KZFM9;
+						DevelopmentTeam = ZGA679W6LR;
 						LastSwiftMigration = 1010;
 					};
 					563B264B1CD9F95F00DE7D8D = {
@@ -570,7 +570,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = K83F2KZFM9;
+				DEVELOPMENT_TEAM = ZGA679W6LR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MTBBarcodeScannerExample/MTBBarcodeScannerExample-Prefix.pch";
 				INFOPLIST_FILE = "MTBBarcodeScannerExample/MTBBarcodeScannerExample-Info.plist";
@@ -595,7 +595,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = K83F2KZFM9;
+				DEVELOPMENT_TEAM = ZGA679W6LR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MTBBarcodeScannerExample/MTBBarcodeScannerExample-Prefix.pch";
 				INFOPLIST_FILE = "MTBBarcodeScannerExample/MTBBarcodeScannerExample-Info.plist";
