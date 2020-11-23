@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.version          = "5.0.13"
   s.summary          = "A lightweight, easy-to-use barcode scanning library for iOS 8+."
   s.homepage         = "https://github.com/soulfirewang/MTBBarcodeScanner"
-  s.license          = 'MIT'git 
+  s.license          = 'MIT'
   s.author           = { "Mike Buss" => "mike@mikebuss.com" }
   s.source           = { :git => "https://github.com/soulfirewang/MTBBarcodeScanner.git", :tag => s.version.to_s }
 
