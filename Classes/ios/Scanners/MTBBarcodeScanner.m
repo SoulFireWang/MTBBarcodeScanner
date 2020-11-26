@@ -357,31 +357,33 @@ static const NSInteger kErrorMethodNotAvailableOnIOSVersion = 1005;
     
     dispatch_time_t delayInSeconds = dispatch_time(DISPATCH_TIME_NOW,(int64_t)(3 * NSEC_PER_SEC));
     
-    if(!self.isAutoFocusContinue) return
+    if(!self.isAutoFocusContinue) return;
         
-    NSLog(@"%@", [NSThread currentThread]);
-    
+    __weak typeof(self) weakSelf = self;
+   
     dispatch_after(delayInSeconds, dispatch_get_global_queue(0, 0), ^{
         
-        if(!self.isAutoFocusContinue) return;
-        if([self.captureDevice lockForConfiguration:nil]){
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        
+        if(!strongSelf.isAutoFocusContinue) return;
+        if([strongSelf.captureDevice lockForConfiguration:nil]){
             
-            if(self.captureDevice.focusPointOfInterestSupported){
-                self.captureDevice.focusPointOfInterest = CGPointMake(0.5, 0.5);
-                self.captureDevice.focusMode = AVCaptureFocusModeAutoFocus;
+            if(strongSelf.captureDevice.focusPointOfInterestSupported){
+                strongSelf.captureDevice.focusPointOfInterest = CGPointMake(0.5, 0.5);
+                strongSelf.captureDevice.focusMode = AVCaptureFocusModeAutoFocus;
             }
             
-            if(self.captureDevice.exposurePointOfInterestSupported){
-                self.captureDevice.exposurePointOfInterest = CGPointMake(0.5, 0.5);
-                self.captureDevice.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
+            if(strongSelf.captureDevice.exposurePointOfInterestSupported){
+                strongSelf.captureDevice.exposurePointOfInterest = CGPointMake(0.5, 0.5);
+                strongSelf.captureDevice.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
             }
             
-            [self.captureDevice unlockForConfiguration];
+            [strongSelf.captureDevice unlockForConfiguration];
             
             NSLog(@"auto focus");
             
-            if(self.isAutoFocusContinue){
-                [self autoFocus];
+            if(strongSelf.isAutoFocusContinue){
+                [strongSelf autoFocus];
             }
         }
     });
